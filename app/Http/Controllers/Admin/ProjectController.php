@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Models\Admin\Project;
 use Illuminate\Support\Facades\Storage;
 
+
 class ProjectController extends Controller
 {
     /**
@@ -60,6 +61,9 @@ class ProjectController extends Controller
     
             $form_data['img'] = $path;
         }
+
+        $slug = Project::generateSlug($request->name);
+        $form_data['slug'] = $slug;
         
         $new_project = new Project();
         $new_project->fill( $form_data );
@@ -117,6 +121,9 @@ class ProjectController extends Controller
             Storage::delete($project->img);
         }
 
+        $slug = Project::generateSlug($request->name);
+        $form_data['slug'] = $slug;
+        
         $form_data = $request->all();
         $project->update($form_data);
         
