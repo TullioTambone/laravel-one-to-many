@@ -10,8 +10,8 @@ class Project extends Model
 {
     use HasFactory;
     
-    public static function generateSlug($name) {
-        return Str::slug($name, '-');
+    public static function generateSlug($title) {
+        return Str::slug($title, '-');
     }
 
     protected $table = 'projects';

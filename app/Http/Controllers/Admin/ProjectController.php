@@ -48,7 +48,7 @@ class ProjectController extends Controller
             [
                 "title" => "required",
                 'description' => "required",
-                'img' => 'nullable|image|mimes:png,jpg,jpge',
+                'img' => 'nullable|image',
                 'type_id' => "nullable|exists:types,id"
             ],
             [
