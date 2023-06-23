@@ -4,10 +4,12 @@
     <ul>
         <li>
             {{ $project->title }}
-            <img src="{{ $project->img }}" alt="">
+            <!-- <img src="{{ $project->img }}" alt=""> -->
+            <img class="img-fluid" src="{{asset('storage/' . $project->img)}}" alt="">
             @if($project->type)
             <h6>type: {{$project->type->name}}</h6>
             @endif
+            
             <div>
                 <a href="{{ route('admin.projects.edit', $project) }}">modifica</a>
                 <form action="{{ route('admin.projects.destroy', $project) }}" method="POST" class="ms-3">

@@ -59,14 +59,14 @@ class ProjectController extends Controller
         
         
         $form_data = $request->all();
-
+        
         if ($request->hasFile('img')) {
             $path = Storage::disk('public')->put('project_images', $request->img);
     
             $form_data['img'] = $path;
         }
 
-        $slug = Project::generateSlug($request->name);
+        $slug = Project::generateSlug($request->title);
         $form_data['slug'] = $slug;
         
         $new_project = new Project();
@@ -111,6 +111,7 @@ class ProjectController extends Controller
      */
     public function update(Request $request, Project $project)
     {
+
         $request->validate(
             [
                 "title" => "required",
@@ -124,14 +125,21 @@ class ProjectController extends Controller
             ]
         );
 
-        if( $project->cover_image ){
-            Storage::delete($project->img);
+        $form_data = $request->all();
+        
+        if ($request->hasFile('img')) {
+            if( $project->img ){
+                Storage::delete($project->img);
+            }
+
+            $path = Storage::disk('public')->put('project_images', $request->img);
+            
+            $form_data['img'] = $path;
         }
 
         $slug = Project::generateSlug($request->name);
         $form_data['slug'] = $slug;
         
-        $form_data = $request->all();
         $project->update($form_data);
         
         return redirect()->route('admin.projects.index');

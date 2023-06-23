@@ -31,7 +31,7 @@
 
         <div class="mb-3">
             <label for="type" class="form-label">tipologia</label>
-            <select class="form-select form-select-lg @error ('type_id') is-invalid @enderror" name="name" id="type">
+            <select class="form-select form-select-lg @error ('type_id') is-invalid @enderror" name="type_id" id="type">
                 <option value="">-- scegli una tipologia --</option>
                 @foreach($types as $e)
                 <option value="{{ $e->id }}">{{ $e->name }}</option>
